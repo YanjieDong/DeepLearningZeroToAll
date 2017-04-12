@@ -17,7 +17,7 @@ dimension = x_data.shape[1]
 batch_size = 25
 train_iter = mx.io.NDArrayIter(x_data, y_data, batch_size, shuffle=True, label_name='lin_reg_label')
 
-# 2. Build Linear Regression Model
+# 2. Build the Linear Regression Symbol
 data = mx.sym.Variable("data")
 target = mx.sym.Variable("target")
 pred = mx.sym.FullyConnected(data=data, num_hidden=1, name='pred')
@@ -25,7 +25,7 @@ loss = mx.sym.mean(mx.sym.square(target - pred))
 loss = mx.sym.make_loss(loss)
 
 
-# 3. Build the network
+# 3. Construct the Module based on the symbol.
 net = mx.mod.Module(symbol=loss,
                     data_names=['data'],
                     label_names=['target'],
